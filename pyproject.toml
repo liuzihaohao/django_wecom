@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django_wecom"
+version = "1.0"
+description = "Wecom Auth for Django"
+readme = "readme.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [
+    { name = "Edgar Liu", email = "liuzihao@qdzx.net.cn" }
+]
+dependencies = [
+    "requests"
+]
+
+[project.urls]
+Homepage = "https://github.com/liuzihaohao/django-wecom"
+
+[tool.setuptools]
+packages = ["django_wecom", "django_wecom.migrations"]
+

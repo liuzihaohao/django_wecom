@@ -1,0 +1,33 @@
+name: Build and Publish Python Package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install build dependencies
+        run: pip install --upgrade setuptools wheel build twine
+
+      - name: Install project dependencies
+        run: pip install .
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to PyPI
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/* -u __token__ -p "$PYPI_API_TOKEN"
